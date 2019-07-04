@@ -8,6 +8,8 @@ class Post(models.Model):
     slug = models.SlugField(max_length=150, unique=True)
     body = models.TextField(blank=True, db_index=True)
     tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
+    # blank=True -  we specify that post may not has a tag
+    # related_name='posts' - We adding property 'posts' for a Tag class
     date_pub = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
