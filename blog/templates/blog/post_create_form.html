@@ -1,13 +1,12 @@
 {% extends 'blog/base_blog.html' %}
 
 {% block title %}
-    Tag Create - {{ block.super }}
+    Post Create - {{ block.super }}
 {% endblock %}
 
 
 {% block content %}
-    <div class="form-group">
-        <form action="{% url 'tag_create_url' %}" method="POST">
+        <form action="{% url 'post_create_url' %}" method="POST">
             {% csrf_token %}
 
             {% for field in form %}
@@ -21,8 +20,7 @@
                     {{ field }}
                 </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" name="button" class="btn btn-primary">Create</button>
         </form>
-    </div>
 
 {% endblock %}
