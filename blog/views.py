@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect
-from .models import Post, Tag
+
 from django.views.generic import View
-from .utils import ObjectDetailMixin, ObjectCreateMixin
+from .utils import *
 from .forms import TagForm, PostForm
 
 # Create your views here.
@@ -32,12 +31,10 @@ class TagCreate(ObjectCreateMixin, View):
     template = 'blog/tag_create.html'
 
 
-class TagUpdate(View):
-    def get(self, request, slug):
-        tag = Tag.objects.get(slug__iexact=slug)
-        bound_form = TagForm(instance=tag)
-        return render(request, 'blog/tag_update_form.html', context={'form': bound_form, 'tag': tag})
-
+class TagUpdate(ObjectUpdateMixin, View):
+    model = Tag
+    model_form = TagForm
+    template = 'blog/tag_upgrade_form.html'
 
 def tags_list(request):
     tags = Tag.objects.all()
