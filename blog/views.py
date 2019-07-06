@@ -1,5 +1,6 @@
 
 from django.views.generic import View
+from django.urls import reverse
 from .utils import *
 from .forms import TagForm, PostForm
 
@@ -41,6 +42,17 @@ class TagUpdate(ObjectUpdateMixin, View):
     model = Tag
     model_form = TagForm
     template = 'blog/tag_update_form.html'
+
+
+class TagDelete(View):
+    def get(self, request, slug):
+        tag = Tag.objects.get(slug__iexact=slug)
+        return render(request, 'blog/tag_delete_form.html', context={'tag': tag})
+
+    def post(self, request, slug):
+        tag = Tag.objects.get(slug__iexact=slug)
+        tag.delete()
+        return redirect(reverse('tags_list_url'))
 
 
 def tags_list(request):
