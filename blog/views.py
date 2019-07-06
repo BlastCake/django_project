@@ -12,8 +12,14 @@ class PostDetail(ObjectDetailMixin ,View):
 
 
 class PostCreate(ObjectCreateMixin, View):
-    form_model = PostForm
+    model_form = PostForm
     template = 'blog/post_create_form.html'
+
+
+class PostUpdate(ObjectUpdateMixin, View):
+    model = Post
+    model_form = PostForm
+    template = 'blog/post_update_form.html'
 
 
 def posts_list(request):
@@ -27,14 +33,15 @@ class TagDetail(ObjectDetailMixin ,View):
 
 
 class TagCreate(ObjectCreateMixin, View):
-    form_model = TagForm
+    model_form = TagForm
     template = 'blog/tag_create.html'
 
 
 class TagUpdate(ObjectUpdateMixin, View):
     model = Tag
     model_form = TagForm
-    template = 'blog/tag_upgrade_form.html'
+    template = 'blog/tag_update_form.html'
+
 
 def tags_list(request):
     tags = Tag.objects.all()
